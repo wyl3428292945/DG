@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上传您的美食菜谱 拿手家常菜-豆果美食</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/upfood.min.css">
+    <link rel="icon" href="https://cp1.douguo.com/static/nweb/images/favicon.ico?v=1912" type="image/x-icon">
+    <link rel="stylesheet" href="./css/public.css">
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <top></top>
+        <div class="container">
+            <div class="wrap">
+                <div class="a-upload">
+                    <input type="file" id="file" accept="image/*" onchange="changepic(this)">
+                    <div class="tiptxt">
+                        添加菜谱成品图
+                        <p>
+                            （建议尺寸1280*1024，支持上传图片格式有jpg、jpeg、png、gif、webp）
+                        </p>
+                    </div>
+                </div>
+                <p class="upname">
+                    <input type="text" placeholder="菜谱名称">
+                </p>
+                <p>
+                    <select name="" id="" class="select">
+                        <option value="1">
+                            烹饪难度
+                        </option>
+                        <option value="2">
+                            切墩(初级)
+                        </option>
+                        <option value="3">
+                            配菜(中级)
+                        </option>
+                        <option value="4">
+                            掌勺(高级)
+                        </option>
+                    </select>
+                    <select name="" id="" class="select">
+                        <option value="1">
+                            烹饪时间
+                        </option>
+                        <option value="2">
+                            10分钟左右
+                        </option>
+                        <option value="3">
+                            10-30分钟
+                        </option>
+                        <option value="4">
+                            30-60分钟
+                        </option>
+                        <option value="4">
+                            1小时以上
+                        </option>
+                    </select>
+                </p>
+                <p>
+                    <textarea class="textarea" placeholder="这道菜背后的故事~（选填）"></textarea>
+                </p>
+                <div class="material">
+                    <h3>食材清单</h3>
+                    <div class="inventory">
+                        <div>
+                            <span>食材</span>
+                            <span>用量</span>
+                        </div>
+                        <p>
+                            <input class="food" type="text" placeholder="如:五花肉">
+                            <input class="usage" type="text" placeholder="如:250g">
+                            <span class="add" onclick="add()"></span>
+                            <span class="up" onclick="up()"></span>
+                            <span class="down" onclick="down()"></span>
+                            <span class="wrng" onclick="wrng()"></span>
+                        </p>
+                        <p>
+                            <input type="text" class="food">
+                            <input type="text" class="usage">
+                            <span class="add" onclick="add()"></span>
+                            <span class="up" onclick="up()"></span>
+                            <span class="down" onclick="down()"></span>
+                            <span class="wrng" onclick="wrng()"></span>
+                        </p>
+                        <p>
+                            <input type="text" class="food">
+                            <input type="text" class="usage">
+                            <span class="add" onclick="add()"></span>
+                            <span class="up" onclick="up()"></span>
+                            <span class="down" onclick="down()"></span>
+                            <span class="wrng" onclick="wrng()"></span>
+                        </p>
+                    </div>
+                    <a href="javascript:;" onclick="add2()">增加一栏</a>
+                </div>
+                <div class="step">
+                    <h3>步骤<span>（支持上传图片格式有jpg、jpeg、png、gif、webp）</span></h3>
+                    <ul>
+                        <li>
+                            <div class="a-upload">
+                                <input type="file" id="file" accept="image/*" onchange="changepic(this)">
+                                <div class="tiptxt">
+                                    添加步骤图
+                                </div>
+                            </div>
+                            <textarea type="text" class="steptext"></textarea>
+                            <p>
+                                <span class="add" onclick="stepAdd()"></span>
+                                <span class="up" onclick="stepUp()"></span>
+                                <span class="down" onclick="stepDown()"></span>
+                                <span class="wrng" onclick="stepWrng()"></span>
+                            </p>
+                        </li>
+                    </ul>
+                    <a href="javascript:;" onclick="stepAdd2()">增加一栏</a>
+                </div>
+            </div>
+        </div>
+        <but></but>
+    </div>
+    <script src="./js/public.js"></script>
+    <script src="./js/upfood.js"></script>
+</body>
+
+</html>

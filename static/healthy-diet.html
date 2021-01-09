@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全部文章_主题站_豆果美食</title>
+
+    <link rel="stylesheet" href="./css/healthy.css">
+    <script src="./js/axios.min.js"></script>
+    <script src="./js/vue.min.js"></script>
+    <link rel="stylesheet" href="./css/public.css">
+
+</head>
+
+<body>
+    <div id="app">
+        <top></top>
+        <div class="content clearfix">
+            <div class="type-tab">
+                <div class="type-head clearfix">
+                    <a href="javascript:;" class="active" onclick="wenz()">全部文章</a>
+                    <a href="javascript:;" onclick="theme()">全部主题站</a>
+                </div>
+            </div>
+            <div class="coten">
+
+            </div>
+            <div class="left">
+                <ul class="mb40">
+                </ul>
+                <div class="pages">
+                    <a href="javascript:;" onclick="shou()">首页</a>
+                    <a href="javascript:;" style="display: none;" class="prev" onclick="preva()">上一页</a>
+                    <div class="wraplist">
+                        <ul class="list clearfix">
+                        </ul>
+                    </div>
+
+                    <a href="javascript:;" onclick="next()" class="nex">下一页</a>
+                    <a href="javascript:;" onclick="end()">末页</a>
+                </div>
+                <div class="fcc">
+                    你当前的位置：<a href="">豆果美食</a> > 主题站
+                </div>
+            </div>
+            <div class="right">
+                <div class="title-head">
+                    <h3>主题站</h3>
+                </div>
+                <ul class="theme-right">
+
+                </ul>
+            </div>
+        </div>
+        <but></but>
+    </div>
+
+
+    <script src="./js/public.js"></script>
+    <script>
+        var mb40 = document.querySelector('.mb40')
+        var theme_right = document.querySelector('.theme-right')
+        var left = document.querySelector('.left')
+        var coten = document.querySelector('.coten')
+        var type_headlist = document.querySelectorAll('.type-head a')
+        var wraplist = document.querySelector('.wraplist')
+        var list = document.querySelector('.list')
+        var prev = document.querySelector('.prev')
+        var nex = document.querySelector('.nex')
+
+        function setData(page = 1, lim = 2) {
+            axios.get('http://localhost:3000', {
+                params: {
+                    page,
+                    lim
+                }
+            }).then(res => {
+                var str = ""
+                for (var i = 0; i < res.data.length; i++) {
+                    str += `
+                <li class="clearfix">
+                    <div class="article-img">
+                        <a href="">
+                            <img src="${res.data[i].img}" alt="">
+                        </a>
+                    </div>
+                    <div class="article-info">
+                        <a href="javascript:;" onclick='getList(${res.data[i].id})'>${res.data[i].title}</a>
+                        <p>来自:<a href="">${res.data[i].from}</a>/p>
+                        <p>${res.data[i].time}</p>
+                        <a href="">查看全文</a>
+                    </div>
+                   </li>
+                  `
+                }
+                mb40.innerHTML = str
+            }).catch(err => {
+                console.log(err)
+
+            })
+        }
+        setData()
+
+
+
+        function shou() {
+            setData(1, 2)
+            for (var i = 0; i < event.target.parentNode.children[2].children[0].children.length; i++) {
+                event.target.parentNode.children[2].children[0].children[i].classList.remove('aon');
+            }
+            event.target.parentNode.children[2].children[0].children[0].classList.add('aon');
+            wraplist.style.width = '150px'
+            list.style.marginLeft = "0"
+            nex.style.display = "block"
+            prev.style.display = "none"
+        }
+
+        function end() {
+            setData(event.target.parentNode.children[2].children[0].lastChild.previousSibling.innerText, 10)
+
+            for (var i = 0; i < event.target.parentNode.children[2].children[0].children.length; i++) {
+                event.target.parentNode.children[2].children[0].children[i].classList.remove('aon');
+            }
+            event.target.parentNode.children[2].children[0].lastChild.previousSibling.classList.add('aon');
+            wraplist.style.width = '255px'
+            list.style.marginLeft = "-75px"
+            nex.style.display = "none"
+            prev.style.display = "block"
+        }
+
+        var res = 0;
+
+        function getLength() {
+            axios.get('http://localhost:3000/list').then(res => {
+                var num = Math.ceil(res.data.length / 10)
+                var str = ""
+                for (var i = 1; i <= num; i++) {
+                    str += `
+                           <li  onclick="getpage()">${i}</li>
+                        `
+                }
+                document.querySelector('.list').innerHTML = str
+                document.querySelector('.list').children[0].classList.add('aon');
+
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+        getLength()
+        var b;
+
+        function preva() {
+            for (var i = 0; i < event.target.parentNode.children[2].children[0].children.length; i++) {
+                if (event.target.parentNode.children[2].children[0].children[i].classList.contains('aon')) {
+                    var res = parseInt(event.target.parentNode.children[2].children[0].children[i].innerText)
+                    b = res - 1
+                    setData(b, 10)
+                }
+                if (event.target.parentNode.children[2].children[0].children[1].classList.contains('aon')) {
+                    setData()
+                }
+                event.target.parentNode.children[2].children[0].children[i].classList.remove('aon');
+            }
+            event.target.parentNode.children[2].children[0].children[b - 1].classList.add('aon');
+
+            if (event.target.parentNode.children[2].children[0].children[b - 1].innerText >= 2 && event.target.parentNode.children[2].children[0].children[b - 1].innerText <= 4) {
+                wraplist.style.width = (150 + (event.target.parentNode.children[2].children[0].children[b - 1].innerText - 1) * 35) + 'px'
+            } else if (event.target.parentNode.children[2].children[0].children[b - 1].innerText >= 4) {
+                wraplist.style.width = '255px'
+            } else if (event.target.parentNode.children[2].children[0].children[b - 1].innerText == 1) {
+                wraplist.style.width = '150px'
+            }
+            if (event.target.parentNode.children[2].children[0].children[b - 1].innerText >= 5 && event.target.parentNode.children[2].children[0].children[b - 1].innerText <= 9 - 3) {
+                list.style.marginLeft = ((event.target.parentNode.children[2].children[0].children[b - 1].innerText - 4) * -35) + 'px'
+            } else if (event.target.parentNode.children[2].children[0].children[b - 1].innerText <= 5) {
+                list.style.marginLeft = '0px'
+            }
+            if (event.target.parentNode.children[2].children[0].children[b - 1].innerText >= 2) {
+                prev.style.display = "block"
+            } else {
+                prev.style.display = "none"
+            }
+            if (event.target.parentNode.children[2].children[0].children[b - 1].innerText >= 9) {
+                nex.style.display = "none"
+            } else if (event.target.parentNode.children[2].children[0].children[b - 1].innerText < 9) {
+                nex.style.display = "block"
+            }
+        }
+        var a;
+
+        function next() {
+            for (var i = 0; i < event.target.parentNode.children[2].children[0].children.length; i++) {
+                if (event.target.parentNode.children[2].children[0].children[i].classList.contains('aon')) {
+
+                    var res = parseInt(event.target.parentNode.children[2].children[0].children[i].innerText)
+                    a = res + 1
+                    setData(a, 10)
+                }
+
+
+
+                event.target.parentNode.children[2].children[0].children[i].classList.remove('aon');
+            }
+            event.target.parentNode.children[2].children[0].children[a - 1].classList.add('aon');
+
+            if (event.target.parentNode.children[2].children[0].children[a - 1].innerText >= 2 && event.target.parentNode.children[2].children[0].children[a - 1].innerText <= 4) {
+                wraplist.style.width = (150 + (event.target.parentNode.children[2].children[0].children[a - 1].innerText - 1) * 35) + 'px'
+            } else if (event.target.parentNode.children[2].children[0].children[a - 1].innerText >= 4) {
+                wraplist.style.width = '255px'
+            } else if (event.target.parentNode.children[2].children[0].children[a - 1].innerText == 1) {
+                wraplist.style.width = '150px'
+            }
+            if (event.target.parentNode.children[2].children[0].children[a - 1].innerText >= 5 && event.target.parentNode.children[2].children[0].children[a - 1].innerText <= 9 - 3) {
+                list.style.marginLeft = ((event.target.parentNode.children[2].children[0].children[a - 1].innerText - 4) * -35) + 'px'
+            } else if (event.target.parentNode.children[2].children[0].children[a - 1].innerText <= 5) {
+                list.style.marginLeft = '0px'
+            }
+            if (event.target.parentNode.children[2].children[0].children[a - 1].innerText >= 2) {
+                prev.style.display = "block"
+            } else {
+                prev.style.display = "none"
+            }
+            console.log(event.target.parentNode.children[2].children[0].children[a - 1].innerText)
+            if (event.target.parentNode.children[2].children[0].children[a - 1].innerText >= 9) {
+                nex.style.display = "none"
+            } else if (event.target.parentNode.children[2].children[0].children[a - 1].innerText < 9) {
+                nex.style.display = "block"
+            }
+
+        }
+
+
+        function getpage() {
+            for (var i = 0; i < event.target.parentNode.children.length; i++) {
+                event.target.parentNode.children[i].classList.remove('aon');
+            }
+            event.target.classList.add('aon');
+            if (event.target != event.target.parentNode.children[0]) {
+                setData(event.target.innerText, 10)
+            } else {
+                setData()
+            }
+            if (event.target.innerText >= 2 && event.target.innerText <= 4) {
+                wraplist.style.width = (150 + (event.target.innerText - 1) * 35) + 'px'
+            } else if (event.target.innerText >= 4) {
+                wraplist.style.width = '255px'
+            } else if (event.target.innerText == 1) {
+                wraplist.style.width = '150px'
+            }
+            if (event.target.innerText >= 5 && event.target.innerText <= parseInt(event.target.parentNode.lastChild.previousSibling.innerText) - 3) {
+                list.style.marginLeft = ((event.target.innerText - 4) * -35) + 'px'
+            } else if (event.target.innerText <= 5) {
+                list.style.marginLeft = '0px'
+            }
+            if (event.target.innerText >= 2) {
+                prev.style.display = "block"
+            } else {
+                prev.style.display = "none"
+            }
+            if (event.target.innerText >= 9) {
+                nex.style.display = "none"
+            } else if (event.target.innerText < 9) {
+                nex.style.display = "block"
+            }
+        }
+
+        axios.get('http://localhost:3000/right').then(res => {
+            var str = ""
+            for (var i = 0; i < res.data.length; i++) {
+                str += `
+                <li>
+                    <div class="theme-img">
+                        <img src="${res.data[i].imgurl}" alt="">
+                    </div>
+                    <a href="
+                    ">${res.data[i].title}</a>
+                    <p>${res.data[i].cont}</p>
+                </li>
+                  `
+
+            }
+
+            theme_right.innerHTML = str
+        }).catch(err => {
+            console.log(err)
+        })
+
+        function getList(i) {
+            localStorage.setItem("id", i)
+            window.location.href = 'healthy-list.html'
+        }
+
+        function wenz() {
+            setData()
+            document.querySelector('.right').style.display = "block"
+            getLength()
+            document.querySelector('.left').style.display = "block"
+            document.querySelector('.coten').style.display = "none"
+            document.querySelector('.pages').style.display = "block"
+            event.target.classList.add('active')
+
+            event.target.parentNode.children[1].classList.remove('active')
+
+        }
+
+        function theme() {
+            axios.get('http://localhost:3000/right').then(res => {
+                var str = ""
+                str += ' <ul class="mb40" style="width:720px">'
+                for (var i = 0; i < res.data.length; i++) {
+                    str += `
+                  
+                <li class="asone clearfix">
+                    <div class="aspc">
+                        <img src="${res.data[i].imgurl}" alt="">
+                    </div>
+                    <h3 href="
+                    "><a href="javascript:;"> ${res.data[i].title}</a></h3>
+                    <p>${res.data[i].cont}</p>
+                    <div class="allthe"> <span><a href="javascript:;">${res.data[i].pians}篇文章</a></span></div>
+                </li>
+              
+                  `
+                }
+                str += '</ul>'
+                coten.innerHTML = str
+                document.querySelector('.left').style.display = "none"
+                document.querySelector('.right').style.display = "none"
+                document.querySelector('.coten').style.display = "block"
+                document.querySelector('.pages').style.display = "none"
+
+            }).catch(err => {
+                console.log(err)
+            })
+            event.target.classList.add('active')
+            event.target.parentNode.children[0].classList.remove('active')
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>找回密码 - 豆果美食</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/forget.min.css">
+    <link rel="icon" href="https://cp1.douguo.com/static/nweb/images/favicon.ico?v=1912" type="image/x-icon">
+    <script src="./js/axios.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="wrap">
+            <a href="index.html"></a>
+        </div>
+    </header>
+    <div class="content">
+        <div class="wrap">
+            <div class="con-top">
+                <h2>找回密码</h2>
+                <p>已有账号 , <a href="login.html">直接登录></a></p>
+            </div>
+            <div class="update">
+                <p>
+                    <input type="text" id="tel" placeholder="请输入您的手机号">
+                </p>
+                <p>
+                    <input type="text" id="test-code" placeholder="验证码"> 
+                    <span onclick="getCode()">获取验证码</span>
+                </p>
+                <p>
+                    <input type="password" id="pwd" placeholder="请输入新密吗">
+                </p>
+                <p id="prompt"></p>
+                <button onclick="submit()">确认修改</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="clink">
+            <a href="javascript">关于豆果</a> ·
+            <a href="javascript">在豆果工作</a> ·
+            <a href="javascript">意见反馈</a> ·
+            <a href="javascript">友情链接</a> · 
+            <a href="javascript">菜谱大全</a> ·
+            <a href="javascript">品牌馆</a>
+        </div>
+        <div class="cght">
+            ©2009-2015 <a href="javascript">北京豆果信息技术有限公司</a> <a href="javascript">京ICP证111032号</a> 京公网安备11010102001133号 京网文[2014]0774-174号
+        </div>
+    </footer>
+    <div class="marsk" onclick="del()">
+        <div class="mar-con">
+            <p>请输入验证码</p>
+            <div>
+                <input type="text" class="msk-ipt">
+                <span class="rd-code"></span>
+            </div>
+            <button class="msk-btn">确认</button>
+        </div>
+    </div>
+    <script src="./js/forget.js"></script>
+</body>
+</html>

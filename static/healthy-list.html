@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/heallist.css">
+    <link rel="stylesheet" href="./css/healthy.css">
+    <script src="./js/axios.min.js"></script>
+    <script src="./js/vue.min.js"></script>
+    <link rel="stylesheet" href="./css/public.css">
+</head>
+
+<body>
+    <div id="app">
+        <top></top>
+        <div class="content clearfix">
+            <div class="type-tab">
+                <div class="type-head clearfix">
+                    <a href="./healthy-diet.html">全部文章</a>
+                    <a href="javascript:;" class="active">全部主题站</a>
+                </div>
+            </div>
+
+            <div class="left" style="width: 690px;">
+                <div class="wrapa">
+
+                </div>
+            </div>
+        </div>
+        <div class="fcc" style="margin-left:400px;">你当前的位置：豆果美食 > 主题站</div>
+        <but></but>
+    </div>
+
+    </div>
+    <script src="./js/public.js"></script>
+    <script>
+        axios.get("http://localhost:3000/detail", {
+                params: {
+                    id: localStorage.getItem("id")
+                }
+            }).then(res => {
+                console.log(res)
+                var str = ""
+                for (var i = 0; i < res.data.length; i++) {
+                    str += `
+                <div class="header">
+                <h3>${res.data[i].title}</h3>
+                <div class="art-info">
+                        <span><a href="">${res.data[i].from}</a> </span> <span><a href="">作者：${res.data[i].zuo}</a></span> <span>${res.data[i].timer}</span> <span>${res.data[i].liulan}</span>
+                    </div>
+                </div>
+                <div class="text">
+                    <div class="tiji">
+                        ${res.data[i].titletoo}
+                    </div>
+                    <div class="par">
+                        <p>
+                            ${res.data[i].conone}
+                        </p>
+                        <br>
+                        <p>${res.data[i].contoo}</p>
+                        <br>
+                        <p>${res.data[i].consoo}</p>
+                        <p>${res.data[i].confff}</p>
+
+                    </div>
+                    <div class="copy">
+                        ${res.data[i].chu}
+                    </div>
+                        `
+                }
+                document.querySelector('.wrapa').innerHTML = str
+            }).catch(err => {
+                console.log(err)
+            })
+            // var date = new Date()
+            // const app = new Vue({
+            //     el: '#wrap',
+            //     data: {
+            //         imgs: [{
+            //             imgurl: './images/mc05.jpg',
+            //             user: "蓝山"
+            //         }, {
+            //             imgurl: './images/mc04.jpg',
+            //             user: "余生"
+            //         }, {
+            //             imgurl: './images/mc02.jpg',
+            //             user: "简乐"
+            //         }],
+            //         text: "",
+            //         lists: [],
+
+        //     },
+        //     methods: {
+        //         getval() {
+        //             if (this.text.length > 0) {
+        //                 var ranObj = this.imgs[this.random(0, 2)]
+        //                 var obj = {
+        //                     user: ranObj.user,
+        //                     imgurl: ranObj.imgurl,
+        //                     num: 0,
+        //                     content: this.text,
+        //                     time: date.toLocaleDateString()
+        //                 }
+        //                 this.lists.push(obj)
+        //             }
+        //             this.text = ""
+
+
+        //         },
+        //         random(a, b) {
+        //             return Math.floor(Math.random() * (b - a + 1) + a);
+        //         }
+        //     }
+
+        // })
+    </script>
+</body>
+
+</html>

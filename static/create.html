@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>创建菜单 - 豆果美食</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/create.min.css">
+    <link rel="icon" href="https://cp1.douguo.com/static/nweb/images/favicon.ico?v=1912" type="image/x-icon">
+    <link rel="stylesheet" href="./css/public.css">
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <top></top>
+        <div class="container">
+            <div class="wrap">
+                <h3>创建菜单</h3>
+                <input type="text" placeholder="菜单名称(必填，30字以内)" id="cdName">
+                <textarea style="resize: none;" placeholder="菜单介绍(选填)" id="cdDesc"></textarea>
+                <h4>添加菜谱<span> (填入豆果美食的食谱地址或食谱ID来添加菜谱，如https://www.douguo.com/cookbook/64339.html或者64339)</span></h4>
+                <input type="text" class="adanurt">
+                <input type="text" class="adanurt">
+                <input type="text" class="adanurt">
+                <input type="text" class="adanurt">
+                <input type="text" class="adanurt">
+                <button id="add-menu">添加</button>
+                <a href="javascript:;" class="a-upload">
+                    <input type="file" id="file" accept="image/*" onchange="changepic(this)">
+                </a>
+                <div class="test">
+                    <span>验证码：</span>
+                    <input type="text" id="test-code">
+                    <span id="rd-code" onclick="rdC()"></span>
+                </div>
+                <button id="submit" onclick="submit()">提交</button>
+            </div>
+        </div>
+        <but></but>
+    </div>
+    
+    <script src="./js/public.js"></script>
+    <script src="./js/create.js"></script>
+</body>
+
+</html>

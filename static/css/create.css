@@ -1,0 +1,148 @@
+body {
+  background: #f8f8f7;
+}
+
+body, button, input, select, textarea {
+  font: 12px Tahoma, Geneva, sans-serif, "Microsoft Yahei";
+  color: #333;
+}
+
+input, button, textarea {
+  border: 0;
+  outline: none;
+}
+
+input, textarea {
+  border: 1px solid #E5E3DF;
+  box-sizing: border-box;
+  font-size: 15px;
+  border-radius: 4px;
+}
+
+input::-webkit-input-placeholder {
+  color: #999;
+}
+
+.wrap {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.container {
+  padding-top: 60px;
+}
+
+.container h3 {
+  margin: 30px 0;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.container .wrap > input {
+  width: 690px;
+  height: 42px;
+  border-radius: 4px;
+  font-size: 15px;
+  display: block;
+  padding: 0 12px;
+}
+
+.container textarea {
+  width: 690px;
+  height: 170px;
+  margin-top: 30px;
+  padding: 12px;
+}
+
+.container h4 {
+  font-size: 20px;
+  margin: 20px 0;
+  line-height: 24px;
+}
+
+.container h4 span {
+  font-size: 12px;
+  color: #999;
+  font-weight: normal;
+}
+
+.container .adanurt {
+  height: 50px;
+  line-height: 50px;
+  margin-bottom: 20px;
+}
+
+.container #add-menu {
+  width: 90px;
+  height: 42px;
+  margin-top: 5px;
+  margin-bottom: 30px;
+  line-height: 42px;
+  color: #fff;
+  text-align: center;
+  background: #FFB31A;
+  border-radius: 4px;
+}
+
+.container .test {
+  margin-top: 30px;
+}
+
+.container .test input {
+  width: 200px;
+  height: 42px;
+  line-height: 42px;
+  padding: 0 12px;
+}
+
+.container .test #rd-code {
+  width: 120px;
+  height: 36px;
+  font-size: 20px;
+  line-height: 36px;
+  display: inline-block;
+  background-color: #c6ccda;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+.container #submit {
+  width: 120px;
+  height: 40px;
+  margin-top: 28px;
+  padding: 0;
+  font-size: 14px;
+  line-height: 40px;
+  background: #FFB31A;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.a-upload {
+  padding: 4px 10px;
+  width: 345px;
+  height: 195px;
+  line-height: 20px;
+  display: block;
+  position: relative;
+  cursor: pointer;
+  color: #888;
+  background: #fafafa;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  background: url("../images/1543312604.jpg") no-repeat;
+  background-size: cover;
+}
+
+.a-upload input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-size: 100px;
+  right: 0;
+  top: 0;
+  opacity: 0;
+  cursor: pointer;
+}

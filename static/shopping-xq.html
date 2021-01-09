@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script src="js/axios.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="./js/vue.min.js"></script>
+	<link rel="stylesheet" href="./css/public.css">
+
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		#app {
+			width: 1000px;
+			height: 360px;
+			margin: 30px auto;
+			display: flex;
+			justify-content: space-between;
+		}
+
+		#app>img {
+			width: 56px;
+			height: 56px;
+			border: 1px solid #FFA500;
+			border-radius: 5px;
+		}
+
+		#app>.two {
+			width: 320px;
+			height: 320px;
+			border: none;
+			border-radius: 0px;
+		}
+
+		.right {
+			width: 580px;
+			height: 320px;
+		}
+
+		#text h3 {
+			height: 60px;
+			font-size: 20px;
+			font-weight: bold;
+			line-height: 30px;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+			margin-top: 30px;
+		}
+
+		#text p {
+			margin-top: 12px;
+			font-size: 15px;
+			line-height: 27px;
+			color: #999;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+		}
+
+		#qian {
+			margin-right: 10px;
+			font-size: 24px;
+			line-height: 24px;
+			color: #FF4C44;
+		}
+
+		#text .sell-info {
+			width: 524px;
+			margin-top: 30px;
+		}
+
+		#yue {
+			margin-right: 30px;
+		}
+
+		.bottom {
+			width: 580px;
+			height: 34px;
+			display: flex;
+			margin-top: 30px;
+		}
+
+		#price {
+			width: 100px;
+			height: 34px;
+			display: flex;
+			border: 1px solid #E5E3DF;
+		}
+
+		#num {
+			display: inline-block;
+			width: 56px;
+			height: 34px;
+			line-height: 34px;
+			vertical-align: top;
+			font-size: 15px;
+			border-left: 1px solid #E5E3DF;
+			border-right: 1px solid #E5E3DF;
+			text-align: center;
+		}
+
+		#jia,
+		#jian {
+			display: inline-block;
+			width: 34px;
+			height: 34px;
+			text-align: center;
+			line-height: 32px;
+			vertical-align: top;
+			font-size: 15px;
+			background: #f8f8f8;
+			color: #FFB31A;
+		}
+
+		.bottom .mai {
+			display: inline-block;
+			width: 80px;
+			border-radius: 4px;
+			background: #FFB31A;
+			color: #fff;
+			font-size: 15px;
+			line-height: 34px;
+			text-align: center;
+			height: 34px;
+			margin-left: 30px;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="app">
+		<!-- 头部 -->
+		<top></top>
+
+		<div id="app4"></div>
+
+		<!-- 底部 -->
+		<but></but>
+	</div>
+	<script src="./js/public.js"></script>
+	<script type="text/javascript">
+		var app4 = document.getElementById("app")
+		axios.get("http://localhost:3000/shopping-xq", {
+			params: {
+				id: localStorage.getItem("id")
+			}
+		}).then(res => {
+			app4.innerHTML = `
+				<img src="${res.data[0].img}">
+				<img src="${res.data[0].img}" class="two">
+				<div class="right">
+					<div id="text">
+						<h3>${res.data[0].title}</h3>
+						<p>${res.data[0].title}</p>
+						<div class="sell-info">
+							<div id="qian">
+								${res.data[0].pirce}
+							</div>
+							<span id="yue">
+								${res.data[0].num}
+							</span>
+						</div>
+						<div class="bottom">
+							<div id="price">
+								<div id="jian">
+									－
+								</div>
+								<div id="num">
+									1
+								</div>
+								<div id="jia">
+									＋
+								</div>
+							</div>
+							<div class="mai">
+								立即购买
+							</div>
+						</div>
+					</div>
+				</div>			
+			`
+		}).catch(err => {
+			console.log(err)
+		})
+	</script>
+</body>
+
+</html>

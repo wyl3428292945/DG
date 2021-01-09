@@ -1,0 +1,65 @@
+* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			.box {
+				width: 1000px;
+				margin: 0 auto;
+				position: relative;
+			}
+			/* #app{
+				height: 10000px;
+			} */
+			.item {
+				position: absolute;
+				border-radius: 15px;
+				overflow: hidden;
+				box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+			}
+
+			.item img {
+				width: 100%;
+				height: 100%;
+			}
+
+			.item .text {
+				padding: 10px;
+				font-size: 12px;
+				background-color: #fefefe;
+				color: #333;
+			}
+
+			.text p {
+				margin-bottom: 10px;
+			}
+
+			.user {
+				display: flex;
+				justify-content: space-between;
+			}
+
+			.user-l {
+				display: flex;
+				align-items: center;
+			}
+
+			.user-l img {
+				display: block;
+				width: 22px;
+				height: 22px;
+				border-radius: 50%;
+				margin-right: 5px;
+			}
+
+			.user-r {
+				display: flex;
+				align-items: center;
+			}
+
+			.user-r .zan {
+				display: block;
+				width: 20px;
+				height: 20px;
+				background: url(../img/like2.png) no-repeat center center;
+			}
